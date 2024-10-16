@@ -8,6 +8,20 @@
 </head>
 
 <body>
+    <!-- Error messages section -->
+    {% if request.args.get('error') == 'invalid-email' %}
+        <p style="color: red;">Invalid email format. Please try again.</p>
+    {% elif request.args.get('error') == 'user-or-email-exists' %}
+        <p style="color: red;">Username or email already exists.</p>
+    {% elif request.args.get('error') == 'missing-fields' %}
+        <p style="color: red;">Please fill in all fields.</p>
+    {% elif request.args.get('error') == 'passwords-do-not-match' %}
+        <p style="color: red;">Passwords do not match.</p>
+    {% elif request.args.get('success') == 'account-created' %}
+        <p style="color: green;">Account successfully created! You can now <a href="/login">login</a>.</p>
+    {% endif %}
+
+    <!-- Registration form -->
     <form method="POST" action="/register">
         <input type="text" name="username" class="form-control" placeholder="Username">
         <input type="text" name="email" class="form-control" placeholder="E-Mail">
